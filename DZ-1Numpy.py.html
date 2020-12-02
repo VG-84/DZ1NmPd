@@ -1,0 +1,84 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
+conda install numpy
+
+
+# In[3]:
+
+
+import numpy as np
+
+
+# In[4]:
+
+
+a = np.array([[1, 6],
+              [2, 8],
+              [3, 11],
+              [3, 10],
+              [1, 7]])
+
+
+# In[5]:
+
+
+a
+
+
+# In[7]:
+
+
+np.mean(a, axis = 0)
+
+
+# In[8]:
+
+
+mean_a = np.array([2. , 8.4])
+
+
+# In[9]:
+
+
+mean_a
+
+
+# In[10]:
+
+
+a_centred = a + mean_a
+
+
+# In[11]:
+
+
+a_centred
+
+
+# In[16]:
+
+
+a_centred_sp = a_centred.shape
+
+
+# In[17]:
+
+
+a_centred_sp
+
+
+# In[21]:
+
+
+np.divide(a_centred_sp, 4)
+
+
+# In[ ]:
+
+
+
+

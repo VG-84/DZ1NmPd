@@ -1,0 +1,137 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[22]:
+
+
+conda install pandas
+
+
+# In[24]:
+
+
+import numpy as np
+
+
+# In[25]:
+
+
+import pandas as pd
+
+
+# In[27]:
+
+
+authors = pd.DataFrame({'author_id':['1', '2', '3'],
+                        'author_name':['Тургенев', 'Чехов', 'Островский']}, columns=['author_id', 'author_name'])
+
+
+# In[28]:
+
+
+authors
+
+
+# In[48]:
+
+
+book = pd.DataFrame({'author_id':['1', '1', '1', '2', '2', '2', '3'],
+                     'book_title':['Отцы и дети', 'Рудин', 'Дворянское гнездо', 'Толстый и тонкий', 'Дама с собачкой', 'Гроза', 'Таланты и поклонники'],
+                     'price':['450', '300', '350', '500', '450', '370', '290']}, columns=['author_id', 'book_title', 'price'])
+
+
+# In[30]:
+
+
+book
+
+
+# In[32]:
+
+
+book.describe()
+
+
+# In[55]:
+
+
+book[["price", "author_id"]] = book[["price", "author_id"]].apply(pd.to_numeric)
+
+
+# In[60]:
+
+
+book.info()
+
+
+# In[57]:
+
+
+authors[["author_id"]] = book[["author_id"]].apply(pd.to_numeric)
+
+
+# In[58]:
+
+
+authors.info()
+
+
+# In[63]:
+
+
+book.price.describe()
+
+
+# In[64]:
+
+
+book.price.head()
+
+
+# In[66]:
+
+
+authors_price = pd.merge(authors, book, on = 'author_id', how = 'outer')
+
+
+# In[67]:
+
+
+authors_price
+
+
+# In[68]:
+
+
+top5=authors_price.nlargest(5, 'price')
+
+
+# In[69]:
+
+
+top5
+
+
+# In[70]:
+
+
+df1 = authors_price.groupby('author_name').agg({'price': 'min'}).rename(columns={'price':'min_price'})
+
+df2 = authors_price.groupby('author_name').agg({'price': 'max'}).rename(columns={'price':'max_price'})
+
+df3 = authors_price.groupby('author_name').agg({'price': 'mean'}).rename(columns={'price':'mean_price'})
+
+authors_stat=pd.concat([df1, df2, df3], axis = 1)
+
+
+# In[71]:
+
+
+authors_stat
+
+
+# In[ ]:
+
+
+
+
